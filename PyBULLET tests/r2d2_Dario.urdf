@@ -1,0 +1,581 @@
+<?xml version="1.0"?>
+<robot name="myfirst">
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+  <material name="other">
+    <color rgba="1 0 0.8 1"/>
+  </material>
+  <variable name="Lower_limit_distal_angle" select="-1"/>
+  <variable name="Upper_limit_distal_angle" select="42"/>
+  X=X+1
+  
+  <link name="Base">
+    <visual>
+      <geometry>
+        <box size="0.01 0.01 .6"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.3 0.3 1.6"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <link name="rail">
+    <visual>
+      <geometry>
+        <cylinder length=".5" radius="0.035"/>
+      </geometry>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder length="5" radius="0.035"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <!--
+  <joint name="Base_rail" type="fixed">
+    <parent link="Base"/>
+    <child link="rail"/>
+    <origin rpy="0 1.57075 0" xyz="2.65 0 .8"/>
+  </joint>
+-->
+  <!--Change hight here-->
+  <joint name="Base_rail" type="prismatic">
+    <axis xyz="0 0 1"/>
+    <parent link="Base"/>
+    <child link="rail"/>
+    <limit effort="10.0" lower="-1" upper="10" velocity="0.5"/>
+    <origin rpy="0 -1.57075 0" xyz="0 0 .78"/>
+  </joint>
+  <link name="body">
+    <visual>
+      <geometry>
+        <box size="1.2 0.3 0.1"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="1.2 0.3 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  
+  <joint name="rail_body" type="prismatic">
+    <axis xyz="0 0 1"/>
+    <parent link="rail"/>
+    <child link="body"/>
+    <limit effort="1.0" lower="-1" upper="10" velocity="0.5"/>
+    <origin rpy="0 1.57075/2 0" xyz="0 0 0"/>
+  </joint>
+  <!--
+  <joint name="rail_body" type="fixed">
+    <parent link="rail"/>
+    <child link="body"/>
+    <origin rpy="0 1.57075/2 0" xyz="0 0 0"/>
+  </joint>
+  -->
+<!--
+  <joint name="rail_body" type="prismatic">
+    <axis xyz="0 0 0"/>
+    <parent link="rail"/>
+    <child link="body"/>
+    <limit effort="1000.0" lower="-1" upper="1" velocity="0.5"/>
+    <origin rpy="0 -1.57075 0" xyz="0 0 0"/>
+  </joint>
+  -->
+  <!--  
+  <joint name="gripper_extension" type="prismatic">
+    <axis xyz="1 0 0"/>
+    <parent link="base_link"/>
+    <child link="gripper_pole"/>
+    <limit effort="1000.0" lower="-0.38" upper="0" velocity="0.5"/>
+    <origin rpy="0 0 1.57075" xyz="0 0.19 .2"/>
+  </joint>
+  -->
+  <!--Right Leg-->
+  <link name="shaft">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="body_shaft" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="1" upper="3" velocity="5"/>
+    <origin rpy="0 0 0" xyz="0.5 0.15 0"/>
+    <parent link="body"/>
+    <child link="shaft"/>
+  </joint> 
+  <link name="rightleg">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>    
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+    </link>    
+  <joint name="shaft_rightleg" type="fixed">
+       <parent link="shaft"/>
+       <child link="rightleg"/>
+       <origin xyz=".2 .1 0"/>
+  </joint>
+  <link name="downshaft">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="rightleg_downshaft" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="0" upper="1.2" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.25 0 0"/> 
+    <parent link="rightleg"/>
+    <child link="downshaft"/>
+  </joint>
+  <link name="downrightleg">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="downshaft_downrightleg" type="fixed">
+    <parent link="downshaft"/>
+    <child link="downrightleg"/>
+    <origin xyz=".2 0 0"/>
+  </joint>
+  <!--Left Leg-->
+  <link name="shaft2">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="body_shaft2" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="1" upper="3" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.5 -0.15 0"/>
+    <parent link="body"/>
+    <child link="shaft2"/>
+  </joint>
+  <link name="leftleg">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="shaft_leftleg" type="fixed">
+    <parent link="shaft2"/>
+    <child link="leftleg"/>
+    <origin xyz=".2 -.1 0"/>
+  </joint>
+  <link name="downshaft2">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="leftleg_downshaft2" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="0" upper="1.2" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.25 0 0"/>
+    <parent link="leftleg"/>
+    <child link="downshaft2"/>
+  </joint>
+  <link name="downleftleg">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="downshaft2_downleftleg" type="fixed">
+    <parent link="downshaft2"/>
+    <child link="downleftleg"/>
+    <origin xyz=".2 0 0"/>
+  </joint>
+  <!--Left Leg2-->
+  <link name="shaft3">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="body_shaft3" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="1.28" upper="3.28" velocity="0.5"/>
+    <origin rpy="0 3 0" xyz="-0.5 -0.15 0"/>
+    <parent link="body"/>
+    <child link="shaft3"/>
+  </joint>
+  <link name="leftleg2">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="shaft3_leftleg2" type="fixed">
+    <parent link="shaft3"/>
+    <child link="leftleg2"/>
+    <origin xyz="-.2 -.1 0"/>
+  </joint>
+  <link name="downshaft3">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="leftleg2_downshaft3" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="0" upper="1.2" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="-0.25 0 0"/>
+    <parent link="leftleg2"/>
+    <child link="downshaft3"/>
+  </joint>
+  <link name="downleftleg2">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="downshaft3_downleftleg2" type="fixed">
+    <parent link="downshaft3"/>
+    <child link="downleftleg2"/>
+    <origin xyz="-.2 0 0"/>
+  </joint>
+  <!--Right Leg2-->
+  <link name="shaft4">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="body_shaft4" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="1.28" upper="3.28" velocity="0.5"/>
+    <origin rpy="0 3 0" xyz="-0.5 0.15 0"/>
+    <parent link="body"/>
+    <child link="shaft4"/>
+  </joint>
+  <link name="rightleg2">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="shaft_rightleg2" type="fixed">
+    <parent link="shaft4"/>
+    <child link="rightleg2"/>
+    <origin xyz="-.2 .1 0"/>
+  </joint>
+  <link name="downshaft4">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="rightleg2_downshaft4" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="0" upper="1.2" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="-0.25 0 0"/>
+    <parent link="rightleg2"/>
+    <child link="downshaft4"/>
+  </joint>
+  <link name="downrightleg2">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <joint name="downshaft4_downrightleg2" type="fixed">
+    <parent link="downshaft4"/>
+    <child link="downrightleg2"/>
+    <origin xyz="-.2 0 0"/>
+  </joint>
+  
+  
+  
+  <!--
+  <link name="downrightleg">
+    <visual>
+      <geometry>
+        <box size="0.4 0.15 0.1"/>
+        <origin xyz="10 0 0"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.6 0.15 0.1"/>
+        <origin rpy="0 0 0" xyz="0.6 .075 0.05"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="10"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+    </inertial>
+  </link>
+  <link name="shaft_rightleg">
+    <visual>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+      <material name="other"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size=".1 0.2 0.1"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="1"/>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <inertia ixx="0" ixy="0.0" ixz="0.0" iyy="0" iyz="0.0" izz="0"/>
+    </inertial>
+  </link>
+  <joint name="downrightleg_shaftrightleg" type="revolute">
+    <axis xyz="0 1 0"/>
+    <limit effort="1000.0" lower="7" upper="6" velocity="0.5"/>
+    <origin rpy="0 0 0" xyz="0.2 0 0"/>
+    <parent link="downrightleg"/>
+    <child link="shaft_rightleg"/>
+  </joint>
+  -->
+  <!--
+<joint name="shaft_rightleg" type="revolute">
+  <axis xyz="0 1 0"/> 
+  <limit effort="1000.0" lower="7" upper="6" velocity="0.5"/>
+  <origin rpy="0 0 0" xyz="0.05 0 0.05"/>
+  <parent link="shaft"/>
+  <child link="rightleg"/>
+</joint>
+-->
+  <!---->
+</robot>

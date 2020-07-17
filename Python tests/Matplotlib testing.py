@@ -35,16 +35,30 @@ print (np.append(a, [[5,5,5],[7,8,9]],axis = 1))
 print ('\n'  )
 print (a)
 
+#To show two figures:
+"""
 plt.figure(1)
 plt.title("a")
 plt.plot(a[1,:],a[0,:])
 plt.grid(True)
-#plt.show()
 
 plt.figure(2)
 plt.title("b")
 plt.plot(a[0,:],a[1,:])
 plt.grid(True)
+"""
+#To show one figure:
+
+plt.plot(a[1,:],a[0,:],label="test1")
+
+plt.plot(a[0,:],a[1,:],label="test2")
+plt.grid(True)
+
+plt.legend(loc='best', bbox_to_anchor=(0.5, 0., 0.5, 0.5),
+           ncol=1, mode=None, borderaxespad=0.)
+
+plt.title("a")
+
 plt.show()
 
 

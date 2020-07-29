@@ -62,6 +62,7 @@ plt.title("a")
 plt.show()
 
 
-
+input1 = input()
+print(input1) 
 
 

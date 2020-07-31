@@ -7,6 +7,9 @@
 
 # INSTALL AND LOAD PACKAGES ################################
 
+
+#DUM: Useful code to clean data, look at lines(density(lynx), col = "blue", lwd = 2) 
+
 library(datasets)  # Load/unload base packages manually
 
 # LOAD DATA ################################################
@@ -36,8 +39,8 @@ curve(dnorm(x, mean = mean(lynx), sd = sd(lynx)),
       add = TRUE)        # Superimpose on previous graph
 
 # Add two kernel density estimators
-lines(density(lynx), col = "blue", lwd = 2)
-lines(density(lynx, adjust = 3), col = "purple", lwd = 2)
+lines(density(lynx), col = "blue", lwd = 2) #DUM: density() density estimator
+lines(density(lynx, adjust = 6), col = "purple", lwd = 2) #DUM: adjust = 6 is "like a moving average"
 
 # Add a rug plot
 rug(lynx, lwd = 2, col = "gray")

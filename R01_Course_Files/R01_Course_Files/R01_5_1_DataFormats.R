@@ -11,7 +11,8 @@
 
 n1 <- 15  # Double precision by default
 n1
-typeof(n1)
+typeof(n1) #DUM: We get [1] 15 "[1]"  "its the index number for 
+            #object in an array."
 
 n2 <- 1.5
 n2
@@ -41,7 +42,8 @@ typeof(l2)
 
 ## Vector ##################################################
 
-v1 <- c(1, 2, 3, 4, 5)
+v1 <- c(1, 2, 3, 4, 5) #DUM: c (concatenate), combine or connect
+                      #DUM:without C it returns an error    
 v1
 is.vector(v1)
 
@@ -61,7 +63,8 @@ m1
 m2 <- matrix(c("a", "b", 
                "c", "d"), 
                nrow = 2,
-               byrow = T)
+               byrow = T) #DUM: Important to take use both: nrow and byrow 
+                          #shape the matrix as we want
 m2
 
 ## Array ###################################################
@@ -72,6 +75,7 @@ a1
 
 ## Data frame ##############################################
 
+#DUM: Data array allows to combine vectors of same length but different types
 # Can combine vectors of the same length
 
 vNumeric   <- c(1, 2, 3)
@@ -79,7 +83,8 @@ vCharacter <- c("a", "b", "c")
 vLogical   <- c(T, F, T)
 
 dfa <- cbind(vNumeric, vCharacter, vLogical)
-dfa  # Matrix of one data type
+dfa  # Matrix of one data type 
+      #DUM: takes the one that is has majority
 
 df <- as.data.frame(cbind(vNumeric, vCharacter, vLogical))
 df  # Makes a data frame with three different data types

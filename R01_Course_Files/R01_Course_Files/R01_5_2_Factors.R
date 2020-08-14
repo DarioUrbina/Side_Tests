@@ -13,11 +13,11 @@
 # Combine variables
 (df1 <- cbind.data.frame(x1, y))
 typeof(df1$x1)
-str(df1)
+str(df1) #DUM showing the structure
 
 # AS.FACTOR ################################################
 
-(x2  <- as.factor(c(1:3)))
+(x2  <- as.factor(c(1:3))) #DUM these specifically represent factors
 (df2 <- cbind.data.frame(x2, y))
 typeof(df2$x2)
 str(df2)

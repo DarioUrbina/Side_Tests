@@ -45,7 +45,7 @@ typeof(l2)
 v1 <- c(1, 2, 3, 4, 5) #DUM: c (concatenate), combine or connect
                       #DUM:without C it returns an error    
 v1
-is.vector(v1)
+is.vector(v1) #DUM: like asking a question
 
 v2 <- c("a", "b", "c")
 v2
@@ -69,7 +69,7 @@ m2
 
 ## Array ###################################################
 
-# Give data, then dimemensions (rows, columns, tables)
+# Give data, then dimensions (rows, columns, tables)
 a1 <- array(c( 1:24), c(4, 3, 2))
 a1
 

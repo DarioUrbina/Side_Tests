@@ -88,6 +88,7 @@ dfa  # Matrix of one data type
 
 df <- as.data.frame(cbind(vNumeric, vCharacter, vLogical))
 df  # Makes a data frame with three different data types
+typeof(df)
 
 ## List ####################################################
 

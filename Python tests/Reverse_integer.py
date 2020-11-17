@@ -4,9 +4,10 @@
 #signed integer range: [−2**31,  2**31 − 1]. For the purpose of this problem,
 #assume that your function returns 0 when the reversed integer overflows.
 
-a = 423456112
+a = 4209090909000012
 b = 0
 count = 0
+flag = 1
 
 print("\na: ",a,", type of a: ",type(a))
 
@@ -23,3 +24,7 @@ for i in digits:
 
 print("b: ",b,", type of b: ",type(b))
 
+if b < (-2**31) or b > (2**31):
+    flag = 0
+
+print("\nflag: ", flag)

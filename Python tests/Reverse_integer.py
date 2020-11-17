@@ -5,17 +5,20 @@
 #assume that your function returns 0 when the reversed integer overflows.
 
 a = 123456111
-
+count = 1
+print("\na: ",a," a  type: ",type(a))
 #int_str =str(a)
 
-digits = [int(d) for d in str(a)]
+digits = [int(d) for d in str(a)] 
+print("\ndigits lenght: ",len(digits), "digits  type: ",type(digits),"\n")
 
-print(len(digits),"\n")
 length = len(digits)
 
 for i in digits:
-    print(digits[len(digits)-i])
+    print("count: ",count)
+    print(digits[len(digits)-count])
     digits_2 = digits[len(digits)-i]
+    count=count+1
 
 #print(digits_2)
 #for i in digits:
@@ -29,6 +32,7 @@ for i in digits:
 
 
 #if int < 2**32:
+
     
 
 

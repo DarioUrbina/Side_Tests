@@ -4,7 +4,7 @@
 #signed integer range: [−2**31,  2**31 − 1]. For the purpose of this problem,
 #assume that your function returns 0 when the reversed integer overflows.
 
-a = 4209090909000012
+a = 123
 b = 0
 count = 0
 flag = 1

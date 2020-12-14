@@ -20,3 +20,4 @@ rownames(data) <- paste( rep("row",10) , c(1:10) , sep=" ")
 # plot it flipping the axis
 levelplot( t(data[c(nrow(data):1) , ]),
            col.regions=heat.colors(100))
+data[1,3]

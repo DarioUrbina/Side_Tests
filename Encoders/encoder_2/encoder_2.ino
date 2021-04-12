@@ -26,6 +26,7 @@ void loop() {
   noInterrupts();
   protectedCount = count;
   interrupts();
+
  
   if(protectedCount != previousCount) {
     Serial.print(protectedCount * convRatio);

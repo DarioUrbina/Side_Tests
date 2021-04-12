@@ -19,7 +19,7 @@ void setup() {
   pinMode(encoderPinB, INPUT_PULLUP);
  
   attachInterrupt(digitalPinToInterrupt(encoderPinA), isrA, HIGH);
-  //attachInterrupt(digitalPinToInterrupt(encoderPinB), isrB, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(encoderPinB), isrB, HIGH);
 }
 
 void loop() {
@@ -37,16 +37,17 @@ void loop() {
 }
 
 void isrA() {
-  if(readA != 0) {
+  if(readA != readB) {
     count ++;
-  } /*else {
+  } else {
     count --;
-  }*/
+  }
 }
-/*void isrB() {
+
+void isrB() {
   if (readA == readB) {
     count ++;
   } else {
     count --;
   }
-}*/
+}

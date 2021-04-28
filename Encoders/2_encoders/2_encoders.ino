@@ -23,9 +23,9 @@ void setup() {
 }
 
 void loop() {
-  //noInterrupts();
+  noInterrupts();
   protectedCount = count;
-  //interrupts();
+  interrupts();
 
  
   if(protectedCount != previousCount) {

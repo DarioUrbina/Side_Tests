@@ -1,7 +1,7 @@
 //DUM: Interrupts are not directly handeled by the void loop or the "main" part of the code
 //they are handeled by hardware structures 
 
-const byte encoderPinA = 2;//outputA digital pin2
+const byte encoderPinA = 2;//outputA digital pin2   // for mega 18 and 19 work properly
 const byte encoderPinB = 3;//outoutB digital pin3
 volatile long count = 0;
 long protectedCount = 0;
@@ -20,7 +20,7 @@ float pwmValA=(PWM*255)/100;
 
 
 void setup() {
-  Serial.begin (115200);
+  Serial.begin (115200);//
 
   pinMode(encoderPinA, INPUT_PULLUP);
   pinMode(encoderPinB, INPUT_PULLUP);
@@ -48,8 +48,9 @@ void loop() {
     Serial.print(" / ");
     Serial.println(protectedCount);
   }
+
   
-            if (protectedCount > 1){
+            if (protectedCount > 6){
               while (protectedCount > 0){
               noInterrupts();
               protectedCount = count;
@@ -77,6 +78,7 @@ void isrA() {
   } else {
     count --;
   }
+  detachInterrupt (digitalPinToInterrupt (encoderPinA));
 }
 
 void isrB() {
@@ -85,4 +87,5 @@ void isrB() {
   } else {
     count --;
   }
+  detachInterrupt (digitalPinToInterrupt (encoderPinA));
 }
